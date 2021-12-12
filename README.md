@@ -178,10 +178,20 @@ plt.show()
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3 para un locutor, y rellene la tabla siguiente con los valores obtenidos.
+  >
+  > Usamos los siguientes comandos obtener nuestros resultados mediante el programa *pearson*:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+pearson -N work/lp/BLOCK01/SES017/*.lp >lp_pearson.txt
+pearson -N work/lpcc/BLOCK01/SES017/*.lpcc >lpcc_pearson.txt
+pearson -N work/mfcc/BLOCK01/SES017/*.mfcc >mfcc_pearson.txt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  > 
+  > De este modo, generamos tres ficheros de texto, uno para cada parametrización, con los coeficientes de la 
+  > correlación normalizada entre los parámetros 2 y 3 para el locutor **BLOCK01/SES017**. Estos son:
 
-  |                        | LP   | LPCC | MFCC |
-  |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |      |      |      |
+  |                        | LP        | LPCC 	   | MFCC      |
+  |------------------------|:---------:|:---------:|:---------:|
+  | &rho;<sub>x</sub>[2,3] | -0.874552 | 0.147184  | -0.210605 |
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
   
@@ -201,10 +211,14 @@ Complete el código necesario para entrenar modelos GMM.
 
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
+
+  > **FALTA POR HACER BIEN**
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+
+  > **FALTA POR HACER BIEN**
 
 ### Reconocimiento del locutor.
 

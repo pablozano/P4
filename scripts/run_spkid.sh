@@ -84,6 +84,7 @@ fi
 # \TODO
 # Create your own features with the name compute_$FEAT(), where $FEAT is the name of the feature.
 # - Select (or change) different features, options, etc. Make you best choice and try several options.
+# \DONE
 
 compute_lp() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
@@ -134,10 +135,13 @@ for cmd in $*; do
        ## @file
 	   # \TODO
 	   # Select (or change) good parameters for gmm_train
+       # \DONE
+       # Inicialización VQ 
        for dir in $db/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           gmm_train  -v 1 -T 0.001 -N5 -m 1 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
+            gmm_train  -v 1 -T 0.0001 -t 0.0001 -N 90 -n 90 -m 60 -i 1 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
+           # gmm_train  -v 1 -T 0.001 -N5 -m 1 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
    elif [[ $cmd == test ]]; then
@@ -160,6 +164,7 @@ for cmd in $*; do
 	   # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
 	   #
 	   # - The name of the world model will be used by gmm_verify in the 'verify' command below.
+       # \EN CLASE 13/12
        echo "Implement the trainworld option ..."
    elif [[ $cmd == verify ]]; then
        ## @file
@@ -170,6 +175,7 @@ for cmd in $*; do
 	   #   For instance:
 	   #   * <code> gmm_verify ... > $w/verif_${FEAT}_${name_exp}.log </code>
 	   #   * <code> gmm_verify ... | tee $w/verif_${FEAT}_${name_exp}.log </code>
+       # \EN CLASE 13/12
        echo "Implement the verify option ..."
 
    elif [[ $cmd == verif_err ]]; then
@@ -187,7 +193,10 @@ for cmd in $*; do
 	   # Perform the final test on the speaker classification of the files in spk_ima/sr_test/spk_cls.
 	   # The list of users is the same as for the classification task. The list of files to be
 	   # recognized is lists/final/class.test
-       echo "To be implemented ..."
+       # \DONE
+       compute_$FEAT $db_test $lists/final/class.test
+       (gmm_classify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/final/class.test | 
+            cut -f 1,2 | tee class_test.log) || exit 1
    
    elif [[ $cmd == finalverif ]]; then
        ## @file

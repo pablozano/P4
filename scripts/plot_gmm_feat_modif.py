@@ -91,18 +91,15 @@ def limsGMM(means, covs, fStd=3):
 
     return min_, max_
 
-def plotGMM(fileGMM, xDim, yDim, percents, colorGmm, filesFeat=None, colorFeat=None, limits=None, subplot=111):
+def plotGMM(fileGMM, xDim, yDim, percents, colorGmm, colorGmm2, filesFeat=None, fileGmm2=None, FilesFeat2=None, colorFeat=None, colorFeat2=None, limits=None):
     weights, means, covs = read_gmm(fileGMM)
 
-    ax = plt.subplot(subplot)
     if filesFeat:
         feats = np.ndarray((0, 2))
         for fileFeat in filesFeat:
             feat = read_fmatrix(fileFeat)
             feat = np.stack((feat[..., xDim], feat[..., yDim]), axis=-1)
             feats = np.concatenate((feats, feat))
-
-        ax.scatter(feats[:, 0], feats[:, 1], .05, color=colorFeat)
 
     means = np.stack((means[..., xDim], means[..., yDim]), axis=-1)
     covs = np.stack((covs[..., xDim], covs[..., yDim]), axis=-1)
