@@ -220,7 +220,7 @@ plot_gmm_feat work/gmm/mfcc/SES007.gmm
   >
   > Con ello obtenemos la siguiente gráfica:
   >
-  > <img src="img/SES007.PNG" width="800" align="center">
+  > <img src="img/SES007.png" width="800" align="center">
   > 
   > Si quisieramos la representación más detallada, podríamos usar el siguiente comando para entrenar a SES007:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
@@ -248,7 +248,7 @@ python3 scripts/plot_gmm_feat.py SES007.gmm
   > 
   > El gráfico resultante es el siguiente:
   >
-  > <img src="img/SES007_2.PNG" width="800" align="center">
+  > <img src="img/SES007_2.png" width="800" align="center">
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
@@ -263,7 +263,7 @@ plot_gmm_feat work/gmm/mfcc/SES007.gmm work/mfcc/BLOCK00/SES007/SA007S* &
   >
   > El resultado es el siguiente:
   > 
-  > <img src="img/SES007_3.PNG" width="800" align="center">
+  > <img src="img/SES007_3.png" width="800" align="center">
   >
   > Observamos como la mayor densidad de muestras del locutor SES007 concuerda con la estimación de la región 
   > prevista en la gráfica anterior.
@@ -275,11 +275,11 @@ plot_gmm_feat work/gmm/mfcc/SES007.gmm work/mfcc/BLOCK00/SES007/SA007S* &
 plot_gmm_feat work/gmm/mfcc/SES017.gmm work/mfcc/BLOCK01/SES016/SA016S* &
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   >
-  > <img src="img/SES007_4.PNG" width="800" align="center">
+  > <img src="img/SES007_4.png" width="800" align="center">
   >
   > Estas muestras realmente corresponden al siguiente modelo:
   >
-  > <img src="img/SES007_5.PNG" width="800" align="center">
+  > <img src="img/SES007_5.png" width="800" align="center">
 
 ### Reconocimiento del locutor.
 
@@ -290,7 +290,7 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
   |                        | LP        | LPCC 	   | MFCC      |
   |------------------------|:---------:|:---------:|:---------:|
-  | Error Rate 		   |           |           |           |
+  | Error Rate 		         |           |           |           |
 
 ### Verificación del locutor.
 
@@ -303,12 +303,9 @@ Complete el código necesario para realizar verificación del locutor y optimice
  
   |                    | MFCC (verificación) | MFCC (reconocimiento) |
   |--------------------|:-------------------:|:---------------------:|
-  | Umbral óptimo      |    		     |      		     |
-  |--------------------|:-------------------:|:---------------------:|
+  | Umbral óptimo      |    		             |      		             |
   | Falsas alarmas     |                     |                       |
-  |--------------------|:-------------------:|:---------------------:|
   | Pérdidas           |                     |                       |
-  |--------------------|:-------------------:|:---------------------:|
   | Coste de detección |                     |                       |
 
 ### Test final
