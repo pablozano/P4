@@ -143,7 +143,7 @@ def plotGMM(fileGMM, xDim, yDim, percents, colorGmm, filesFeat=None, colorFeat=N
     plt.axis('tight')
     plt.axis(limits)
     #plt.show()
-    plt.savefig("mygraph.png")
+    plt.savefig("SES007_5.png")
 
 ########################################################################################################
 # Main Program

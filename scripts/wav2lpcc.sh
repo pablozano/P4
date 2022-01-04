@@ -39,9 +39,9 @@ else
    LPC2C="lpc2c"
 fi
 
-# Main command for feature extraction
+# Main command for feature extration
 sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
-    $LPC -l 240 -m $lpc_order | $LPC2C -m $lpc_order -M $lpcc_order > $base.lpcc
+	$LPC -l 240 -m $lpc_order | $LPC2C -m $lpc_order -M $lpcc_order > $base.lpcc
 
 # Our array files need a header with the number of cols and rows:
 ncol=$((lpcc_order+1)) # lpc p =>  (gain a1 a2 ... ap) 

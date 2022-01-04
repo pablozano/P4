@@ -4,7 +4,7 @@
 ## \TODO This file implements a very trivial feature extraction; use it as a template for other front ends.
 ## 
 ## Please, read SPTK documentation and some papers in order to implement more advanced front ends.
-
+## \DONE
 # Base name for temporary files
 base=/tmp/$(basename $0).$$ 
 
@@ -38,7 +38,7 @@ else
    LPC="lpc"
 fi
 
-# Main command for feature extraction
+# Main command for feature extration
 sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
 	$LPC -l 240 -m $lpc_order > $base.lp
 

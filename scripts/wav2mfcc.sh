@@ -12,15 +12,16 @@ cleanup() {
    \rm -f $base.*
 }
 
-if [[ $# != 4 ]]; then
-   echo "$0 mfcc_order melbank_order input.wav output.mfcc"
+if [[ $# != 5 ]]; then
+   echo "$0 sampling_freq mfcc_order melbank_order input.wav output.mfcc"
    exit 1
 fi
 
-mfcc_order=$1
-melbank_order=$2
-inputfile=$3
-outputfile=$4
+sampling_freq=$1
+mfcc_order=$2
+melbank_order=$3
+inputfile=$4
+outputfile=$5
 
 UBUNTU_SPTK=1
 if [[ $UBUNTU_SPTK == 1 ]]; then
@@ -37,12 +38,12 @@ else
    MFCC="mfcc"
 fi
 
-# Main command for feature extraction
+# Main command for feature extration
 sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
-    $MFCC -s 8 -w 0 -l 240 -m $mfcc_order -n $melbank_order > $base.mfcc
+	$MFCC -s $sampling_freq -l 240 -m $mfcc_order -n $melbank_order > $base.mfcc
 
 # Our array files need a header with the number of cols and rows:
-ncol=$((mfcc_order)) # lpc p =>  (gain a1 a2 ... ap) 
+ncol=$((mfcc_order)) # mfcc p =>  (a0 a1 a2 ... ap-1) 
 nrow=`$X2X +fa < $base.mfcc | wc -l | perl -ne 'print $_/'$ncol', "\n";'`
 
 # Build fmatrix file by placing nrow and ncol in front, and the data after them

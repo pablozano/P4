@@ -191,7 +191,7 @@ pearson -N work/mfcc/BLOCK01/SES017/*.mfcc >mfcc_pearson.txt
 
   |                        | LP        | LPCC 	   | MFCC      |
   |------------------------|:---------:|:---------:|:---------:|
-  | &rho;<sub>x</sub>[2,3] | -0.874552 | 0.147184  | -0.210605 |
+  | &rho;<sub>x</sub>[2,3] | -0.874552 | 0.147184  | -0.177738 |
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
   
@@ -211,14 +211,75 @@ Complete el código necesario para entrenar modelos GMM.
 
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
-
-  > **FALTA POR HACER BIEN**
+  >
+  > Después de entrenar todos los modelos, podemos visualizar la gráfica de SES007, por ejemplo, con el comando:
+  >
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+plot_gmm_feat work/gmm/mfcc/SES007.gmm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  >
+  > Con ello obtenemos la siguiente gráfica:
+  >
+  > <img src="img/SES007.PNG" width="800" align="center">
+  > 
+  > Si quisieramos la representación más detallada, podríamos usar el siguiente comando para entrenar a SES007:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+gmm_train -d work/lp -e lp -g SES007.gmm -m 10 -N 100000 -T  0.0001 -i 2 lists/class/SES007.train
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  >
+  > Si nos fijamos en la parte de *usage* en el código *gmm_train*, observamos como **-d** indica el directorio
+  > de los ficheros de entrada, **-lp** la extensión de éstos, **-g** el nombre del fichero de salida, **-m** 
+  > indica el número de gaussianas, **-N** son las iteraciones y **-T** es el umbral de convergencia con el que 
+  > se finalizan las iteraciones cuando el incremento no supera este valor (en este caso, T = 0.0001). Por último, 
+  > **-i** indica el método de inicialización: 0 para una inicialización aleatoria (random), 1 para VQ y 2 para EM, 
+  > que ha sido la inicialización elegida para este caso.
+  >
+  > Ejecutamos el comando y se genera un fichero **SES007.gmm**, que usaremos para crear la gráfica pedida mediante 
+  > el siguiente comando:
+  >
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+python3 scripts/plot_gmm_feat.py SES007.gmm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  >
+  > No sabemos por qué no nos funcionaba la línea *plt.show()* en este programa, cuando se ha usado en prácticas
+  > anteriores, pero hemos usado *plt.savefig("nombre_fig.png")* en su lugar y obtenemos los mismos resultados, la
+  > figura no aparece en pantalla al acabar la ejecución, pero sí que se guarda en el directorio con el nombre 
+  > indicado. 
+  > 
+  > El gráfico resultante es el siguiente:
+  >
+  > <img src="img/SES007_2.PNG" width="800" align="center">
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
 
-  > **FALTA POR HACER BIEN**
+  > A continuación mostramos la gráfica del GMM anterior, el SES007, con las muestras del locutor correspondiente
+  > mediante el siguiente comando:
+  >
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+plot_gmm_feat work/gmm/mfcc/SES007.gmm work/mfcc/BLOCK00/SES007/SA007S* &
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  >
+  > El resultado es el siguiente:
+  > 
+  > <img src="img/SES007_3.PNG" width="800" align="center">
+  >
+  > Observamos como la mayor densidad de muestras del locutor SES007 concuerda con la estimación de la región 
+  > prevista en la gráfica anterior.
+  >
+  > Ahora podemos usar las muestras de otro locutor para ver como habrá menor correlación entre las muestras y 
+  > la región estimada, resultando así en una peor modulación. Usamos, por ejemplo, SES016:
+  >
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+plot_gmm_feat work/gmm/mfcc/SES017.gmm work/mfcc/BLOCK01/SES016/SA016S* &
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  >
+  > <img src="img/SES007_4.PNG" width="800" align="center">
+  >
+  > Estas muestras realmente corresponden al siguiente modelo:
+  >
+  > <img src="img/SES007_5.PNG" width="800" align="center">
 
 ### Reconocimiento del locutor.
 
@@ -226,6 +287,10 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
+
+  |                        | LP        | LPCC 	   | MFCC      |
+  |------------------------|:---------:|:---------:|:---------:|
+  | Error Rate 		   |           |           |           |
 
 ### Verificación del locutor.
 
@@ -236,6 +301,16 @@ Complete el código necesario para realizar verificación del locutor y optimice
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
  
+  |                    | MFCC (verificación) | MFCC (reconocimiento) |
+  |--------------------|:-------------------:|:---------------------:|
+  | Umbral óptimo      |    		     |      		     |
+  |--------------------|:-------------------:|:---------------------:|
+  | Falsas alarmas     |                     |                       |
+  |--------------------|:-------------------:|:---------------------:|
+  | Pérdidas           |                     |                       |
+  |--------------------|:-------------------:|:---------------------:|
+  | Coste de detección |                     |                       |
+
 ### Test final
 
 - Adjunte, en el repositorio de la práctica, los ficheros `class_test.log` y `verif_test.log` 
