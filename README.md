@@ -307,7 +307,8 @@ Complete el código necesario para realizar verificación del locutor y optimice
   >
   > <img src="img/cost.PNG" width="800" align="center">
  
-  |                    | MFCC (verificación) | 
+  |                    | MFCC (verificación) |
+  |--------------------|:-------------------:| 
   | Umbral óptimo      |   0.2697070212704   |      		  
   | Falsas alarmas     |   7/1000=0.0070     |                          
   | Pérdidas           |   26/250=0.1040     |                          
