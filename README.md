@@ -220,7 +220,7 @@ plot_gmm_feat work/gmm/mfcc/SES007.gmm
   >
   > Con ello obtenemos la siguiente gráfica:
   >
-  > <img src="img/SES007.png" width="800" align="center">
+  > <img src="img/ses007.png" width="800" align="center">
   > 
   > Si quisieramos la representación más detallada, podríamos usar el siguiente comando para entrenar a SES007:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
@@ -248,7 +248,7 @@ python3 scripts/plot_gmm_feat.py SES007.gmm
   > 
   > El gráfico resultante es el siguiente:
   >
-  > <img src="img/SES007_2.png" width="800" align="center">
+  > <img src="img/ses007_2.png" width="800" align="center">
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
@@ -263,7 +263,7 @@ plot_gmm_feat work/gmm/mfcc/SES007.gmm work/mfcc/BLOCK00/SES007/SA007S* &
   >
   > El resultado es el siguiente:
   > 
-  > <img src="img/SES007_3.png" width="800" align="center">
+  > <img src="img/ses007_3.png" width="800" align="center">
   >
   > Observamos como la mayor densidad de muestras del locutor SES007 concuerda con la estimación de la región 
   > prevista en la gráfica anterior.
@@ -275,11 +275,11 @@ plot_gmm_feat work/gmm/mfcc/SES007.gmm work/mfcc/BLOCK00/SES007/SA007S* &
 plot_gmm_feat work/gmm/mfcc/SES017.gmm work/mfcc/BLOCK01/SES016/SA016S* &
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   >
-  > <img src="img/SES007_4.png" width="800" align="center">
+  > <img src="img/ses007_4.png" width="800" align="center">
   >
   > Estas muestras realmente corresponden al siguiente modelo:
   >
-  > <img src="img/SES007_5.png" width="800" align="center">
+  > <img src="img/ses007_5.png" width="800" align="center">
 
 ### Reconocimiento del locutor.
 
@@ -287,10 +287,14 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
-
+  >
+  > <img src="img/error_lp.PNG" width="800" align="center">
+  > <img src="img/error_lpcc.PNG" width="800" align="center">
+  > <img src="img/error_mfcc.PNG" width="800" align="center">
+  >
   |                        | LP        | LPCC 	   | MFCC      |
   |------------------------|:---------:|:---------:|:---------:|
-  | Error Rate 		         |           |           |           |
+  | Error Rate 		   |   8.92%   |   2.68%   |   0.64%   |
 
 ### Verificación del locutor.
 
@@ -300,13 +304,14 @@ Complete el código necesario para realizar verificación del locutor y optimice
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
+  >
+  > <img src="img/cost.PNG" width="800" align="center">
  
-  |                    | MFCC (verificación) | MFCC (reconocimiento) |
-  |--------------------|:-------------------:|:---------------------:|
-  | Umbral óptimo      |    		             |      		             |
-  | Falsas alarmas     |                     |                       |
-  | Pérdidas           |                     |                       |
-  | Coste de detección |                     |                       |
+  |                    | MFCC (verificación) | 
+  | Umbral óptimo      |   0.2697070212704   |      		  
+  | Falsas alarmas     |   7/1000=0.0070     |                          
+  | Pérdidas           |   26/250=0.1040     |                          
+  | Coste de detección |       16.7          |                          
 
 ### Test final
 
