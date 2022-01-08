@@ -309,10 +309,10 @@ Complete el código necesario para realizar verificación del locutor y optimice
  
   |                    | MFCC (verificación) |
   |--------------------|:-------------------:| 
-  | Umbral óptimo      |   0.2697070212704   |      		  
-  | Falsas alarmas     |   7/1000=0.0070     |                          
-  | Pérdidas           |   26/250=0.1040     |                          
-  | Coste de detección |       16.7          |                          
+  | Umbral óptimo      |   0.243096625600008 |      		  
+  | Falsas alarmas     |   8/1000=0.0080     |                          
+  | Pérdidas           |   21/250=0.0840     |                          
+  | Coste de detección |       15.6          |                          
 
 ### Test final
 
